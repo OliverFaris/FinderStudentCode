@@ -12,16 +12,28 @@ import java.io.IOException;
 public class Finder {
 
     private static final String INVALID = "INVALID KEY";
+    private HashMap hashMap;
 
-    public Finder() {}
+    public Finder() {
+        hashMap = new HashMap();
+    }
 
     public void buildTable(BufferedReader br, int keyCol, int valCol) throws IOException {
-        // TODO: Complete the buildTable() function!
+        String line = br.readLine();
+        while (line != null) {
+            // Add key & value to hashmap
+            String[] row = line.split(",");
+            hashMap.add(row[keyCol], row[valCol]);
+            line = br.readLine();
+        }
+
         br.close();
     }
 
     public String query(String key){
-        // TODO: Complete the query() function!
-        return INVALID;
+        String value = hashMap.get(key);
+        if (value == null)
+            return INVALID;
+        return value;
     }
 }
